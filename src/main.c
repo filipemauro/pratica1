@@ -1,14 +1,14 @@
 /********************************************//**
 
 	@authors	Filipe Mauro
-	@mainpage	
-	@brief 		
+	@mainpage
+	@brief
 	@section 	intro_sec Introducao
-				
+
 	@section	lic_sec Licenca
-				
+
 	@sa
-	
+
 	@page conf Configuration bits
 	@brief Os bits de configuracao estao setados no codigo, no arquivo #main. Essas configuracoes devem ser as seguites:
 
@@ -61,6 +61,17 @@
 #define vermelho 1
 #define verde 2
 #define amarelo 3
+#define timeout 30
+#define yellowTime 25
+#define start 0
+#define firstSemaforoVerde 		0b00000100
+#define firstSemaforoAmarelo 	0b00000010
+#define firstSemaforoVermelho 	0b00000001
+#define secondSemaforoVerde 	0b00100000
+#define secondSemaforoAmarelo 	0b00010000
+#define secondSemaforoVermelho 	0b00001000
+
+
 
 
 /********************************
@@ -81,59 +92,99 @@ void main( void );
  /*********************************************/
 void main( void )
 {
-    unsigned char n = 0;
-    unsigned char stateSemaforo = 0;
-    unsigned int i = 0;
+    unsigned char countLoop = start;
+    unsigned char stateSemaforo;
+    unsigned char firstSemaforo;
+    unsigned char secondSemaforo;
+    unsigned int countDelayLoop = start;
     TRISC = 0x00;
-    PORTC=0x00;
+    firstSemaforo = firstSemaforoVermelho;
+    secondSemaforo = secondSemaforoVerde;
+    PORTC = firstSemaforo | secondSemaforo;
     stateSemaforo = vermelho;
 
     while( 1 )
     {
         switch( stateSemaforo )
         {
-
-		//No estado do sinal vermelho, aguardo 30 segundos antes de mudar o estado do sinal para verde.	
+            //No estado do sinal1 vermelho, aguardo 30 segundos antes de mudar o estado para verde.
+            //No estado do sinal2 verde, aguardo 30 segundos para mudar o estado para amarelo.
         case vermelho:
-            if( ++n > 30 )
+            if( ( countLoop==yellowTime ) && ( firstSemaforo == firstSemaforoVermelho ) )
             {
-                n=0;
-                PORTC = 0b00000001;
+                secondSemaforo = secondSemaforoAmarelo;
+            }
+
+            if( ( countLoop==yellowTime ) && ( secondSemaforo== secondSemaforoVermelho ) )
+            {
+                firstSemaforo = firstSemaforoAmarelo;
+            }
+
+            if( ( countLoop==timeout ) && ( firstSemaforo == firstSemaforoAmarelo ) )
+            {
+                firstSemaforo = firstSemaforoVermelho;
+                secondSemaforo = secondSemaforoVerde;
+            }
+
+            if( ( countLoop==timeout ) && ( secondSemaforo == secondSemaforoAmarelo ) )
+            {
+                secondSemaforo = secondSemaforoVermelho;
+                firstSemaforo = firstSemaforoVerde;
+            }
+
+            PORTC = firstSemaforo | secondSemaforo;
+
+            if( ++countLoop > timeout )
+            {
+                countLoop=start;
                 stateSemaforo = verde;
             }
 
-            break;
-		//No estado do sinal verde, aguardo 30 segundos antes de mudar o estado do sinal para amarelo.
-        case verde: //sinal aberto
-            if( ++n > 30 )
+            for( countDelayLoop = start; countDelayLoop < 10000; countDelayLoop++ )
             {
-                n = 0;
-				//Estou acionando o amarelo porque o proximo estado será esse.
-                PORTC = 0b000000100;
-				stateSemaforo = amarelo;
-
+                Delay10TCYx( 48 );
             }
-						
-				
+
             break;
 
-        case amarelo: //sinal amarelo
-            if( ++n > 5 )
+            //No estado do sinal verde, aguardo 30 segundos antes de mudar o estado do sinal para amarelo.
+        case verde: //sinal aberto
+            if( ( countLoop==yellowTime ) && ( firstSemaforo == firstSemaforoVermelho ) )
             {
-                n=0;
-				//Estou acionando o vermelho porque o proximo estado será esse.
-                PORTC = 0b000000010;
+                secondSemaforo = secondSemaforoAmarelo;
+            }
+
+            if( ( countLoop==yellowTime ) && ( secondSemaforo== secondSemaforoVermelho ) )
+            {
+                firstSemaforo = firstSemaforoAmarelo;
+            }
+
+            if( ( countLoop == timeout ) && ( firstSemaforo == firstSemaforoAmarelo ) )
+            {
+                firstSemaforo = firstSemaforoVermelho;
+                secondSemaforo = secondSemaforoVerde;
+            }
+
+            if( ( countLoop==timeout ) && ( secondSemaforo == secondSemaforoAmarelo ) )
+            {
+                secondSemaforo = secondSemaforoVermelho;
+                firstSemaforo = firstSemaforoVerde;
+            }
+
+            PORTC = firstSemaforo | secondSemaforo;
+
+            if( ++countLoop > timeout )
+            {
+                countLoop=start;
                 stateSemaforo = vermelho;
             }
 
-            break;
-        }
+            for( countDelayLoop = start; countDelayLoop < 10000; countDelayLoop++ )
+            {
+                Delay10TCYx( 48 );
+            }
 
-//O loop do meu código terá a duraçao de 1 segundo.
-        for( i = 0; i < 10000; i++ )
-        {
-            Delay10TCYx( 48 );
+            break;
         }
     }
 }
-/** @} */// end of group1
