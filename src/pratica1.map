@@ -1,24 +1,24 @@
 MPLINK 4.35, Linker
-Linker Map File - Created Mon Dec 12 16:46:29 2011
+Linker Map File - Created Tue Dec 13 15:01:10 2011
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                _entry_scn       code   0x000000    program   0x000006
                    .cinit    romdata   0x000006    program   0x000002
-             .code_main.o       code   0x000008    program   0x0001f0
-               _cinit_scn       code   0x0001f8    program   0x00009e
-                    .code       code   0x000296    program   0x000020
-             _startup_scn       code   0x0002b6    program   0x00001c
-              D10TCYXCODE       code   0x0002d2    program   0x000016
-           .code___init.o       code   0x0002e8    program   0x000002
-         .idata_c018i.o_i    romdata   0x0002ea    program   0x000000
-         .romdata_c018i.o    romdata   0x0002ea    program   0x000000
-            .code_c018i.o       code   0x0002ea    program   0x000000
-          .idata_main.o_i    romdata   0x0002ea    program   0x000000
-          .romdata_main.o    romdata   0x0002ea    program   0x000000
-        .idata___init.o_i    romdata   0x0002ea    program   0x000000
-        .romdata___init.o    romdata   0x0002ea    program   0x000000
+             .code_main.o       code   0x000008    program   0x00016e
+               _cinit_scn       code   0x000176    program   0x00009e
+                    .code       code   0x000214    program   0x000020
+             _startup_scn       code   0x000234    program   0x00001c
+              D10TCYXCODE       code   0x000250    program   0x000016
+           .code___init.o       code   0x000266    program   0x000002
+         .idata_c018i.o_i    romdata   0x000268    program   0x000000
+         .romdata_c018i.o    romdata   0x000268    program   0x000000
+            .code_c018i.o       code   0x000268    program   0x000000
+          .idata_main.o_i    romdata   0x000268    program   0x000000
+          .romdata_main.o    romdata   0x000268    program   0x000000
+        .idata___init.o_i    romdata   0x000268    program   0x000000
+        .romdata___init.o    romdata   0x000268    program   0x000000
                 MATH_DATA      udata   0x000000       data   0x000002
                  .tmpdata      udata   0x000002       data   0x000002
            .udata_c018i.o      udata   0x000060       data   0x00000a
@@ -35,39 +35,39 @@ Linker Map File - Created Mon Dec 12 16:46:29 2011
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x0002e9      
-            746 out of 33048 program addresses used, program memory utilization is 2%
+                            0x000000    0x000267      
+            616 out of 33048 program addresses used, program memory utilization is 1%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                    D10_1   0x0002e2    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-                     D10x   0x0002da    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-              Delay10TCYx   0x0002d2    program     extern C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000A   0x0002dc    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000C   0x0002de    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000E   0x0002e0    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+                    D10_1   0x000260    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+                     D10x   0x000258    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+              Delay10TCYx   0x000250    program     extern C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000A   0x00025a    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000C   0x00025c    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000E   0x00025e    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
        ___return_lbl00000   0x000004    program     static                          
-       ___return_lbl00001   0x0002d0    program     static                          
-       ___return_lbl00002   0x000294    program     static                          
-                   __init   0x0002e8    program     extern C:\MCC18\src\traditional\stdclib\__init.c
-            __zero_memory   0x000296    program     extern C:\MCC18\src\traditional\proc\p18F45K20.asm
-                _do_cinit   0x0001f8    program     extern C:\MCC18\src\traditional\startup\c018i.c
+       ___return_lbl00001   0x00024e    program     static                          
+       ___return_lbl00002   0x000212    program     static                          
+                   __init   0x000266    program     extern C:\MCC18\src\traditional\stdclib\__init.c
+            __zero_memory   0x000214    program     extern C:\MCC18\src\traditional\proc\p18F45K20.asm
+                _do_cinit   0x000176    program     extern C:\MCC18\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                 _startup   0x0002b6    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                compare_l   0x0002ac    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
-                copy_loop   0x00026a    program     static                          
-            copy_one_byte   0x000270    program     static                          
-                     done   0x000294    program     static                          
-             done_copying   0x00027e    program     static                          
-                     loop   0x0002c6    program     static                          
-                   loop_h   0x0002a4    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
-                   loop_l   0x0002ae    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
+                 _startup   0x000234    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                compare_l   0x00022a    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
+                copy_loop   0x0001e8    program     static                          
+            copy_one_byte   0x0001ee    program     static                          
+                     done   0x000212    program     static                          
+             done_copying   0x0001fc    program     static                          
+                     loop   0x000244    program     static                          
+                   loop_h   0x000222    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
+                   loop_l   0x00022c    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
                      main   0x000008    program     extern C:\projetos\pratica1\src\main.c
-                     test   0x000212    program     static                          
-               zero_block   0x0002a4    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
+                     test   0x000190    program     static                          
+               zero_block   0x000222    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
                    ADCON0   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F45K20.asm
                ADCON0bits   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F45K20.asm
                    ADCON1   0x000fc1       data     extern C:\MCC18\src\traditional\proc\p18F45K20.asm
@@ -290,28 +290,28 @@ Linker Map File - Created Mon Dec 12 16:46:29 2011
                    _entry   0x000000    program     extern C:\MCC18\src\traditional\startup\c018i.c
        ___return_lbl00000   0x000004    program     static                          
                      main   0x000008    program     extern C:\projetos\pratica1\src\main.c
-                _do_cinit   0x0001f8    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     test   0x000212    program     static                          
-                copy_loop   0x00026a    program     static                          
-            copy_one_byte   0x000270    program     static                          
-             done_copying   0x00027e    program     static                          
-                     done   0x000294    program     static                          
-       ___return_lbl00002   0x000294    program     static                          
-            __zero_memory   0x000296    program     extern C:\MCC18\src\traditional\proc\p18F45K20.asm
-               zero_block   0x0002a4    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
-                   loop_h   0x0002a4    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
-                compare_l   0x0002ac    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
-                   loop_l   0x0002ae    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
-                 _startup   0x0002b6    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     loop   0x0002c6    program     static                          
-       ___return_lbl00001   0x0002d0    program     static                          
-              Delay10TCYx   0x0002d2    program     extern C:\MCC18\src\traditional\delays\d10tcyx.asm
-                     D10x   0x0002da    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000A   0x0002dc    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000C   0x0002de    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-        _D10TCYXCODE_000E   0x0002e0    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-                    D10_1   0x0002e2    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
-                   __init   0x0002e8    program     extern C:\MCC18\src\traditional\stdclib\__init.c
+                _do_cinit   0x000176    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     test   0x000190    program     static                          
+                copy_loop   0x0001e8    program     static                          
+            copy_one_byte   0x0001ee    program     static                          
+             done_copying   0x0001fc    program     static                          
+                     done   0x000212    program     static                          
+       ___return_lbl00002   0x000212    program     static                          
+            __zero_memory   0x000214    program     extern C:\MCC18\src\traditional\proc\p18F45K20.asm
+               zero_block   0x000222    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
+                   loop_h   0x000222    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
+                compare_l   0x00022a    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
+                   loop_l   0x00022c    program     static C:\MCC18\src\traditional\proc\p18F45K20.asm
+                 _startup   0x000234    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     loop   0x000244    program     static                          
+       ___return_lbl00001   0x00024e    program     static                          
+              Delay10TCYx   0x000250    program     extern C:\MCC18\src\traditional\delays\d10tcyx.asm
+                     D10x   0x000258    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000A   0x00025a    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000C   0x00025c    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+        _D10TCYXCODE_000E   0x00025e    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+                    D10_1   0x000260    program     static C:\MCC18\src\traditional\delays\d10tcyx.asm
+                   __init   0x000266    program     extern C:\MCC18\src\traditional\stdclib\__init.c
                      SIGN   0x000000       data     extern C:\MCC18\src\traditional\math\cmath18.asm
             __FPFLAGSbits   0x000001       data     extern C:\MCC18\src\traditional\math\cmath18.asm
                 __FPFLAGS   0x000001       data     extern C:\MCC18\src\traditional\math\cmath18.asm

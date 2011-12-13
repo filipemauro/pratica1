@@ -58,11 +58,11 @@
 /************************
 	Macros & Constants
 ************************/
-#define vermelho 1
-#define verde 2
-#define amarelo 3
-#define timeout 30
-#define yellowTime 25
+#define SemaforoB_green 1
+#define SemaforoA_green 2
+#define timeout 37
+#define yellowTime 30
+#define redTime 35
 #define start 0
 #define firstSemaforoVerde 		0b00000100
 #define firstSemaforoAmarelo 	0b00000010
@@ -101,45 +101,45 @@ void main( void )
     firstSemaforo = firstSemaforoVermelho;
     secondSemaforo = secondSemaforoVerde;
     PORTC = firstSemaforo | secondSemaforo;
-    stateSemaforo = vermelho;
+    stateSemaforo = SemaforoB_green;
 
     while( 1 )
     {
         switch( stateSemaforo )
         {
-            //No estado do sinal1 vermelho, aguardo 30 segundos antes de mudar o estado para verde.
-            //No estado do sinal2 verde, aguardo 30 segundos para mudar o estado para amarelo.
-        case vermelho:
-            if( ( countLoop==yellowTime ) && ( firstSemaforo == firstSemaforoVermelho ) )
+            //Espero 37 segundos para o estado do semafor de baixo mudar de verde para vermelho.
+        case SemaforoB_green:
+
+            // Espero 30 segundos para o estado do semaforo de baixo mudar para amarelo, enquanto o de cima esta no vermelho.
+            if( countLoop==yellowTime )
             {
                 secondSemaforo = secondSemaforoAmarelo;
             }
 
-            if( ( countLoop==yellowTime ) && ( secondSemaforo== secondSemaforoVermelho ) )
-            {
-                firstSemaforo = firstSemaforoAmarelo;
-            }
-
-            if( ( countLoop==timeout ) && ( firstSemaforo == firstSemaforoAmarelo ) )
-            {
-                firstSemaforo = firstSemaforoVermelho;
-                secondSemaforo = secondSemaforoVerde;
-            }
-
-            if( ( countLoop==timeout ) && ( secondSemaforo == secondSemaforoAmarelo ) )
+            // Espero 5 segundos no estado amarelo do semaforo de baixo para mudar para vermelho, enquanto o de cima esta no vermelho.
+            if( countLoop==redTime )
             {
                 secondSemaforo = secondSemaforoVermelho;
-                firstSemaforo = firstSemaforoVerde;
+            }
+
+            // Esperar 2 segundos em que os dois semaforos estao no estado vermelho.
+
+            // Acabado o tempo ocorre a inversao dos estados: o semaforo de cima fica verde, enquanto o sinal de baixo esta no vermelho.
+            if( countLoop==timeout )
+            {
+                firstSemaforo=firstSemaforoVerde;
             }
 
             PORTC = firstSemaforo | secondSemaforo;
 
+            // Passou do tempo limite, ocorre a troca de caso.
             if( ++countLoop > timeout )
             {
                 countLoop=start;
-                stateSemaforo = verde;
+                stateSemaforo = SemaforoA_green;
             }
 
+            //Bloco utilizado para contagem do tempo: aproximadamente 1s.
             for( countDelayLoop = start; countDelayLoop < 10000; countDelayLoop++ )
             {
                 Delay10TCYx( 48 );
@@ -147,38 +147,39 @@ void main( void )
 
             break;
 
-            //No estado do sinal verde, aguardo 30 segundos antes de mudar o estado do sinal para amarelo.
-        case verde: //sinal aberto
-            if( ( countLoop==yellowTime ) && ( firstSemaforo == firstSemaforoVermelho ) )
-            {
-                secondSemaforo = secondSemaforoAmarelo;
-            }
+            //Espero 37 segundos para o estado do semaforo de cima mudar de verde para vermelho.
+        case SemaforoA_green:
 
-            if( ( countLoop==yellowTime ) && ( secondSemaforo== secondSemaforoVermelho ) )
+            // Espero 30 segundos para o estado do semaforo de cima mudar para amarelo, enquanto o de baixo esta no vermelho.
+            if( countLoop==yellowTime )
             {
                 firstSemaforo = firstSemaforoAmarelo;
             }
 
-            if( ( countLoop == timeout ) && ( firstSemaforo == firstSemaforoAmarelo ) )
+            // Espero 5 segundos no estado amarelo do semaforo de cima para mudar para vermelho, enquanto o de baixo esta no vermelho.
+            if( countLoop == redTime )
             {
                 firstSemaforo = firstSemaforoVermelho;
-                secondSemaforo = secondSemaforoVerde;
             }
 
-            if( ( countLoop==timeout ) && ( secondSemaforo == secondSemaforoAmarelo ) )
+            // Esperar 2 segundos em que os dois semaforos estao no estado vermelho.
+
+            // Acabado o tempo ocorre a inversao dos estados: o semaforo de baixo fica verde, enquanto o sinal de cima esta no vermelho.
+            if( countLoop == timeout )
             {
-                secondSemaforo = secondSemaforoVermelho;
-                firstSemaforo = firstSemaforoVerde;
+                secondSemaforo=secondSemaforoVerde;
             }
 
             PORTC = firstSemaforo | secondSemaforo;
 
+            // Passou do tempo limite, ocorre a troca de caso.
             if( ++countLoop > timeout )
             {
                 countLoop=start;
-                stateSemaforo = vermelho;
+                stateSemaforo = SemaforoB_green;
             }
 
+            //Bloco utilizado para contagem do tempo: aproximadamente 1s.
             for( countDelayLoop = start; countDelayLoop < 10000; countDelayLoop++ )
             {
                 Delay10TCYx( 48 );
